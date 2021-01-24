@@ -29,10 +29,6 @@ buildscript {
     }
 }
 
-plugins {
-    id 'com.github.spotbugs' version '1.6.9'
-}
-
 group 'io.github.novacrypto'
 version '2019.01.27'
 
@@ -43,19 +39,6 @@ apply from: 'bintray.gradle'
 // ./gradlew dependencyUpdates -Drevision=release
 // https://github.com/ben-manes/gradle-versions-plugin
 apply plugin: 'com.github.ben-manes.versions'
-
-spotbugs {
-    toolVersion = '3.1.11'
-}
-
-allprojects {
-    tasks.withType(com.github.spotbugs.SpotBugsTask) {
-        reports {
-            xml.enabled = false
-            html.enabled = true
-        }
-    }
-}
 
 // To upload a new version
 // ./gradlew clean build bintrayUpload -Puser=user -Pkey=APIKEY
@@ -89,8 +72,8 @@ repositories {
 }
 
 compileJava {
-    sourceCompatibility = '1.7'
-    targetCompatibility = '1.7'
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
 }
 
 dependencies {
