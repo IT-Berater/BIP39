@@ -24,7 +24,9 @@ import io.github.novacrypto.bip39.wordlists.English;
  * 
  * Siehe auch online:
  * 
- * https://iancoleman.io/bip39/ http://bip39.de/
+ * https://iancoleman.io/bip39/
+ * 
+ * http://bip39.de/
  * 
  * @author Thomas Wenzlaff
  */
