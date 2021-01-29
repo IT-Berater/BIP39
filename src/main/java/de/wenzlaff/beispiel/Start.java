@@ -94,14 +94,50 @@ public class Start {
 		// Abgeleitete Adressen
 		// Beachten Sie, dass diese Adressen vom erweiterten BIP32-Schlüssel abgeleitet
 		// sind, und nun mal drei Adressen ausgeben
+		//
 
-		System.out.println("\nAdressen:");
+// Es gibt 3 Arten von Adressen ldt https://de.wikipedia.org/wiki/Bitcoin
+
+// P2PKH oder Legacy address (altes Adressformat) ist die erste Version einer Bitcoin-Adresse, die mit der Nummer „1“ beginnt und 26 bis 36 Zeichen hat. 
+		// Die durchschnittliche Gebühr beim Senden von einer P2PKH-Adresse ist
+		// normalerweise höher als beim Senden von einer Segwit-Adresse, da
+		// Transaktionen mit veralteten Adressen größer sind. Beispiel:
+		// 1HHRPAXhiMGRXh1HakrCVyukAU2TBcvrDa
+
+// P2SH Der neue Adresstyp ist ähnlich wie P2PKH aufgebaut, beginnt jedoch mit
+		// „3“ anstelle von „1“.
+		// P2SH bietet komplexere Funktionen als der vorherige Adresstyp. Um über P2SH
+		// gesendete Bitcoins auszugeben, muss der Empfänger ein Skript bereitstellen,
+		// das dem Skript-Hash und den Daten entspricht, wodurch das Skript wahr wird.
+		// Ein gewöhnlicher Benutzer muss jedoch lediglich wissen, dass bei Verwendung
+		// dieser Art von Adresse anstelle von P2PKH die durchschnittliche
+		// Transaktionsgebühr geringer ist. Beispiel: 3GL1MMJvw99DbrzoPQYhu7H5Zv2S8ykvPy
+
+// P2WPKH oder Bech32 ist ein erweiterter Adresstyp, der zum Reduzieren der Blockchain-Blockgrößen verwendet wird, 
+		// um die Transaktionsantwortzeit zu beschleunigen. Adressen beginnen mit „bc1“
+		// und sind länger als P2PKH und P2SH. Bech32 ist das native
+		// Segwit-Adressierungsformat (obwohl P2SH auch eine Segwit-Adresse sein kann),
+		// weshalb normalerweise die Verwendung von Segwit-Adressen gemeint ist. Der
+		// Vorteil ist die niedrigste Transaktionssendegebühr und die hohe
+		// Verarbeitungsgeschwindigkeit. Der Nachteil solcher Adressen ist, dass sie
+		// noch nicht von allen Geldbörsen und Systemen unterstützt werden. Beispiel:
+		// bc1qj5swkkkk50ymyeqx2em906jfft86ptd4xs8wwf
+
+		System.out.println("\nAdressen Typ: p2pkh:");
 		String addressMethod = privateKey.derive("m/0'/0'/0").neuter().p2pkhAddress();
 		System.out.println("0. Adresse: " + addressMethod);
 		addressMethod = privateKey.derive("m/0'/0'/1").neuter().p2pkhAddress();
 		System.out.println("1. Adresse: " + addressMethod);
 		addressMethod = privateKey.derive("m/0'/0'/2").neuter().p2pkhAddress();
 		System.out.println("2. Adresse: " + addressMethod);
+
+		System.out.println("\nAdressen Typ: p2sh");
+		addressMethod = privateKey.derive("m/0'/0'/0").neuter().p2shAddress();
+		System.out.println("0. P2SH Adresse: " + addressMethod);
+		addressMethod = privateKey.derive("m/0'/0'/1").neuter().p2shAddress();
+		System.out.println("1. P2SH Adresse: " + addressMethod);
+		addressMethod = privateKey.derive("m/0'/0'/2").neuter().p2shAddress();
+		System.out.println("2. P2SH Adresse: " + addressMethod);
 	}
 
 	private static String encodeBytesToHex(byte[] bytes) {
